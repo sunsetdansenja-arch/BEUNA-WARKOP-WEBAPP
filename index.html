@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasir - Beuna Rakan Warkop</title>
+    <!-- Menggunakan font bawaan Apple (San Francisco) via system-ui -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        appleGray: '#F5F5F7',
+                        appleDark: '#1D1D1F',
+                        appleRed: '#FF3B30', // Warna merah khas Apple
+                        appleRedHover: '#E3332A'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Sembunyikan scrollbar untuk tampilan lebih bersih ala Mac */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D1D5DB; }
+    </style>
+</head>
+<body class="bg-appleGray text-appleDark h-screen flex overflow-hidden antialiased selection:bg-appleRed selection:text-white">
+
+    <!-- BAGIAN KIRI: DAFTAR MENU -->
+    <main class="flex-1 flex flex-col h-full">
+        <!-- Header Nav -->
+        <header class="flex justify-between items-center px-8 py-6 bg-white/60 backdrop-blur-md border-b border-gray-100 z-10">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight">Adun Kupi</h1>
+                <p class="text-sm text-gray-500 font-medium">Dashboard Kasir</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" placeholder="Cari minuman..." class="bg-gray-100 placeholder-gray-400 text-sm rounded-full pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-appleRed/50 transition">
+                </div>
+                <div class="h-10 w-10 bg-gradient-to-tr from-appleRed to-red-400 rounded-full flex items-center justify-center text-white font-bold shadow-md cursor-pointer">
+                    K1
+                </div>
+            </div>
+        </header>
+
+        <!-- Kategori Menu (Pills) -->
+        <div class="px-8 py-4 flex gap-3 overflow-x-auto">
+            <button class="bg-appleDark text-white px-5 py-1.5 rounded-full text-sm font-semibold shadow-sm">Semua</button>
+            <button class="bg-white text-gray-600 hover:text-appleRed px-5 py-1.5 rounded-full text-sm font-semibold shadow-sm border border-gray-100 transition">Kopi</button>
+            <button class="bg-white text-gray-600 hover:text-appleRed px-5 py-1.5 rounded-full text-sm font-semibold shadow-sm border border-gray-100 transition">Non-Kopi</button>
+            <button class="bg-white text-gray-600 hover:text-appleRed px-5 py-1.5 rounded-full text-sm font-semibold shadow-sm border border-gray-100 transition">Makanan</button>
+        </div>
+
+        <!-- Grid Produk -->
+        <div class="flex-1 overflow-y-auto px-8 pb-8 pt-2">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Card Produk 1 -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm hover:shadow-lg border border-transparent hover:border-appleRed/20 transition cursor-pointer group flex flex-col justify-between h-48">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-red-50 text-appleRed p-2 rounded-xl">
+                            <i class="fa-solid fa-mug-hot text-xl"></i>
+                        </div>
+                        <span class="opacity-0 group-hover:opacity-100 text-appleRed transition"><i class="fa-solid fa-plus-circle text-xl"></i></span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg leading-tight mb-1">Sanger Espresso</h3>
+                        <p class="text-gray-500 text-sm font-medium">Rp 15.000</p>
+                    </div>
+                </div>
+
+                <!-- Card Produk 2 -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm hover:shadow-lg border border-transparent hover:border-appleRed/20 transition cursor-pointer group flex flex-col justify-between h-48">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-red-50 text-appleRed p-2 rounded-xl">
+                            <i class="fa-solid fa-mug-saucer text-xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg leading-tight mb-1">Kopi Hitam</h3>
+                        <p class="text-gray-500 text-sm font-medium">Rp 10.000</p>
+                    </div>
+                </div>
+
+                <!-- Card Produk 3 -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm hover:shadow-lg border border-transparent hover:border-appleRed/20 transition cursor-pointer group flex flex-col justify-between h-48">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-blue-50 text-blue-500 p-2 rounded-xl">
+                            <i class="fa-solid fa-glass-water text-xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg leading-tight mb-1">Teh Dingin</h3>
+                        <p class="text-gray-500 text-sm font-medium">Rp 8.000</p>
+                    </div>
+                </div>
+                
+                <!-- Card Produk 4 -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm hover:shadow-lg border border-transparent hover:border-appleRed/20 transition cursor-pointer group flex flex-col justify-between h-48">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-orange-50 text-orange-500 p-2 rounded-xl">
+                            <i class="fa-solid fa-bowl-food text-xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg leading-tight mb-1">Indomie Telur</h3>
+                        <p class="text-gray-500 text-sm font-medium">Rp 12.000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- BAGIAN KANAN: CART / RINCIAN PESANAN -->
+    <aside class="w-96 bg-white h-full shadow-[-10px_0_30px_rgba(0,0,0,0.03)] flex flex-col z-20 relative">
+        <div class="p-6 border-b border-gray-100">
+            <h2 class="text-xl font-bold mb-4">Rincian Pesanan</h2>
+            
+            <!-- Input Nama Ala Apple -->
+            <div class="relative">
+                <i class="fa-regular fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="customerName" placeholder="Nama Customer" class="w-full bg-appleGray rounded-xl pl-10 pr-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-appleRed/50 transition border border-transparent focus:border-appleRed/30">
+            </div>
+        </div>
+
+        <!-- List Pesanan -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-5">
+            <!-- Item 1 -->
+            <div class="flex items-center justify-between">
+                <div class="flex-1">
+                    <h4 class="font-semibold text-sm">Sanger Espresso</h4>
+                    <p class="text-appleRed font-medium text-sm">Rp 30.000</p>
+                </div>
+                <div class="flex items-center gap-3 bg-appleGray rounded-full px-2 py-1">
+                    <button class="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-appleRed"><i class="fa-solid fa-minus text-xs"></i></button>
+                    <span class="text-sm font-bold w-4 text-center">2</span>
+                    <button class="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-appleRed"><i class="fa-solid fa-plus text-xs"></i></button>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="flex items-center justify-between">
+                <div class="flex-1">
+                    <h4 class="font-semibold text-sm">Indomie Telur</h4>
+                    <p class="text-appleRed font-medium text-sm">Rp 12.000</p>
+                </div>
+                <div class="flex items-center gap-3 bg-appleGray rounded-full px-2 py-1">
+                    <button class="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-appleRed"><i class="fa-solid fa-minus text-xs"></i></button>
+                    <span class="text-sm font-bold w-4 text-center">1</span>
+                    <button class="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-appleRed"><i class="fa-solid fa-plus text-xs"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Checkout -->
+        <div class="p-6 bg-white border-t border-gray-100">
+            <!-- Summary -->
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-gray-500 font-medium">Subtotal</span>
+                <span class="font-bold">Rp 42.000</span>
+            </div>
+            
+            <!-- Toggle Metode Pembayaran -->
+            <div class="flex bg-appleGray p-1 rounded-xl mb-6">
+                <button class="flex-1 bg-white shadow-sm rounded-lg py-2 text-sm font-bold text-appleDark">Cash</button>
+                <button class="flex-1 rounded-lg py-2 text-sm font-bold text-gray-500 hover:text-appleDark transition">Transfer</button>
+            </div>
+
+            <!-- Total & Pay Button -->
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-lg font-bold">Total</span>
+                <span class="text-2xl font-black text-appleRed">Rp 42.000</span>
+            </div>
+            <button class="w-full bg-appleRed hover:bg-appleRedHover text-white rounded-2xl py-4 font-bold text-lg shadow-lg shadow-appleRed/30 transition transform active:scale-95 flex justify-center items-center gap-2">
+                <i class="fa-solid fa-check-circle"></i> Bayar Sekarang
+            </button>
+        </div>
+    </aside>
+
+</body>
+</html>

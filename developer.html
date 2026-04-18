@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUPICASH - SUPER ADMIN</title>
+    
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/sunsetdansenja-arch/BEUNA-WARKOP-WEBAPP/main/logo%20kupicash.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Archivo Black"', 'Impact', 'sans-serif'],
+                    },
+                    colors: {
+                        neoGreen: '#39FF14',
+                        neoBlack: '#111111',
+                        neoWhite: '#FFFFFF',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #111111; color: #39FF14; }
+        .border-neo { border: 4px solid #39FF14; }
+        .shadow-neo { box-shadow: 6px 6px 0px #39FF14; }
+        .btn-neo:hover { background-color: #39FF14; color: #111111; }
+        .input-neo { background: #111111; color: #39FF14; border: 2px solid #39FF14; }
+        .input-neo:focus { background-color: #39FF14; color: #111111; outline: none; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden antialiased flex items-center justify-center" style="background-image: linear-gradient(rgba(57, 255, 20, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(57, 255, 20, 0.1) 1px, transparent 1px); background-size: 30px 30px;">
+
+    <div class="bg-neoBlack border-neo shadow-neo p-10 w-[500px]">
+        <div class="text-center mb-8 border-b-4 border-neoGreen pb-4">
+            <h1 class="text-4xl font-display uppercase tracking-widest">KUPICASH</h1>
+            <p class="text-sm font-bold tracking-widest mt-2 uppercase">> ROOT_DEVELOPER_ACCESS</p>
+        </div>
+
+        <h2 class="font-bold uppercase mb-4 text-xl">> DEPLOY NEW TENANT (WARKOP)</h2>
+        
+        <form id="form-deploy" class="space-y-5">
+            <div>
+                <label class="block font-bold uppercase mb-1">> ID_WARKOP_BARU (No Spaces)</label>
+                <input type="text" id="dev-tenant" placeholder="warkop_agam" class="w-full px-4 py-3 font-bold uppercase input-neo" required>
+            </div>
+            <div>
+                <label class="block font-bold uppercase mb-1">> OWNER_USERNAME</label>
+                <input type="text" id="dev-user" placeholder="owner_agam" class="w-full px-4 py-3 font-bold uppercase input-neo" required>
+            </div>
+            <div>
+                <label class="block font-bold uppercase mb-1">> OWNER_PASSWORD</label>
+                <input type="text" id="dev-pass" placeholder="supersecret" class="w-full px-4 py-3 font-bold input-neo" required>
+            </div>
+
+            <button type="submit" class="w-full border-neo py-4 font-display text-xl uppercase tracking-widest mt-6 btn-neo transition-colors">
+                [EXECUTE DEPLOYMENT]
+            </button>
+        </form>
+
+        <button onclick="window.location.href='index.html'" class="w-full mt-4 text-center text-sm uppercase hover:underline">
+            < RETURN TO NORMAL LOGIN
+        </button>
+    </div>
+
+    <script>
+        const WEBHOOK_URL = 'https://n8n-mzbmiib3etk4.kangkung.sumopod.my.id/webhook/beuna-api';
+
+        document.getElementById('form-deploy').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerText = '[PROCESSING...]'; btn.disabled = true;
+
+            const newTenant = document.getElementById('dev-tenant').value.trim().toLowerCase();
+            
+            // PAYLOAD: action 'insert', sub_action: 'auth'
+            try {
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        action: 'insert', 
+                        sub_action: 'auth', 
+                        tenant: newTenant, // Tenant di-inject paksa di sini
+                        new_username: document.getElementById('dev-user').value.trim(),
+                        new_password: document.getElementById('dev-pass').value,
+                        new_role: 'owner' // Hardcode sebagai OWNER
+                    })
+                });
+                alert(`SUCCESS! TENANT [${newTenant}] TELAH AKTIF.\nSilakan serahkan Username & Password ke Pemilik Warkop.`);
+                e.target.reset();
+            } catch (err) {
+                alert("DEPLOYMENT FAILED. CHECK n8n SERVER.");
+            }
+
+            btn.innerText = '[EXECUTE DEPLOYMENT]'; btn.disabled = false;
+        });
+    </script>
+</body>
+</html>

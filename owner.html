@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUPICASH - OWNER DASHBOARD</title>
+    
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/sunsetdansenja-arch/BEUNA-WARKOP-WEBAPP/main/logo%20kupicash.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Space Grotesk"', 'Arial Black', 'sans-serif'],
+                        display: ['"Archivo Black"', 'Impact', 'sans-serif'],
+                    },
+                    colors: {
+                        neoOrange: '#FF5000',
+                        neoGreen: '#39FF14',
+                        neoBlack: '#111111',
+                        neoWhite: '#FFFFFF',
+                        neoGray: '#E5E5E5'
+                    },
+                    boxShadow: {
+                        'neo': '8px 8px 0px #111111',
+                        'neo-sm': '4px 4px 0px #111111',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #E5E5E5; }
+        .border-neo { border: 4px solid #111111; }
+        .border-neo-b { border-bottom: 4px solid #111111; }
+        .border-neo-r { border-right: 4px solid #111111; }
+        .btn-neo:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #111111; }
+        .btn-neo:active { transform: translate(4px, 4px) !important; box-shadow: 0px 0px 0px #111111 !important; }
+        .input-neo:focus { background-color: #39FF14; outline: none; }
+        .hidden-view { display: none !important; }
+    </style>
+</head>
+<body class="text-neoBlack h-screen w-screen overflow-hidden antialiased selection:bg-neoBlack selection:text-neoGreen flex flex-col">
+
+    <header class="flex justify-between items-center px-8 py-5 bg-neoGreen border-neo-b z-10">
+        <div class="flex items-center gap-4">
+            <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/BEUNA-WARKOP-WEBAPP/main/logo%20kupicash.png" class="h-12 border-neo shadow-neo-sm bg-neoOrange">
+            <div class="bg-neoBlack text-neoWhite px-4 py-2 border-neo shadow-neo-sm">
+                <h1 class="text-2xl font-display uppercase tracking-wider" id="header-tenant-name">WARKOP</h1>
+            </div>
+            <span class="bg-neoWhite font-bold px-3 py-1 border-neo-sm uppercase text-sm shadow-neo-sm">OWNER PANEL</span>
+        </div>
+        <button onclick="logout()" class="bg-neoWhite border-neo px-6 py-2 font-bold btn-neo shadow-neo-sm uppercase">
+            <i class="fa-solid fa-power-off mr-2"></i>LOGOUT
+        </button>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        <aside class="w-64 bg-neoWhite border-neo-r p-6 flex flex-col gap-4">
+            <button onclick="switchTab('tab-report')" class="bg-neoBlack text-neoWhite border-neo p-4 font-display uppercase text-left btn-neo">📊 ANALYTICS</button>
+            <button onclick="switchTab('tab-menu')" class="bg-neoOrange border-neo p-4 font-display uppercase text-left btn-neo">🍔 KELOLA MENU</button>
+            <button onclick="switchTab('tab-staff')" class="bg-neoGreen border-neo p-4 font-display uppercase text-left btn-neo">👥 KELOLA KASIR</button>
+        </aside>
+
+        <main class="flex-1 overflow-y-auto p-8" style="background-image: radial-gradient(#111 1px, transparent 1px); background-size: 20px 20px;">
+            
+            <div id="tab-report" class="space-y-6 max-w-4xl mx-auto">
+                <div class="bg-neoWhite border-neo shadow-neo p-8 flex items-center justify-between">
+                    <div>
+                        <h2 class="font-bold uppercase text-neoGray-500 mb-2 border-b-4 border-neoBlack inline-block">TOTAL OMSET HARI INI</h2>
+                        <p class="font-display text-6xl text-neoOrange" id="report-omset">Rp 0</p>
+                    </div>
+                    <button onclick="loadReport()" class="bg-neoBlack text-neoWhite border-neo p-4 btn-neo h-full"><i class="fa-solid fa-rotate"></i></button>
+                </div>
+            </div>
+
+            <div id="tab-menu" class="hidden-view space-y-6 max-w-4xl mx-auto">
+                <div class="bg-neoWhite border-neo shadow-neo p-6">
+                    <h2 class="font-display text-2xl uppercase mb-4 border-neo-b pb-2">TAMBAH MENU BARU</h2>
+                    <form id="form-add-menu" class="flex gap-4 items-end">
+                        <div class="flex-1">
+                            <label class="block font-bold uppercase mb-1">NAMA MENU</label>
+                            <input type="text" id="menu-name" class="w-full border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm" required>
+                        </div>
+                        <div class="w-48">
+                            <label class="block font-bold uppercase mb-1">HARGA (Rp)</label>
+                            <input type="number" id="menu-price" class="w-full border-neo px-4 py-3 font-bold input-neo shadow-neo-sm" required>
+                        </div>
+                        <button type="submit" class="bg-neoOrange border-neo px-8 py-3 font-bold uppercase shadow-neo-sm btn-neo">TAMBAH +</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="tab-staff" class="hidden-view space-y-6 max-w-4xl mx-auto">
+                <div class="bg-neoWhite border-neo shadow-neo p-6">
+                    <h2 class="font-display text-2xl uppercase mb-4 border-neo-b pb-2">BUAT AKUN KASIR BARU</h2>
+                    <form id="form-add-staff" class="space-y-4">
+                        <div>
+                            <label class="block font-bold uppercase mb-1">USERNAME KASIR</label>
+                            <input type="text" id="staff-username" class="w-full border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm" required>
+                        </div>
+                        <div>
+                            <label class="block font-bold uppercase mb-1">PASSWORD</label>
+                            <input type="text" id="staff-password" class="w-full border-neo px-4 py-3 font-bold input-neo shadow-neo-sm" required>
+                        </div>
+                        <button type="submit" class="w-full bg-neoGreen border-neo py-4 font-display text-xl uppercase shadow-neo-sm btn-neo">DAFTARKAN KASIR</button>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const WEBHOOK_URL = 'https://n8n-mzbmiib3etk4.kangkung.sumopod.my.id/webhook/beuna-api';
+        let appState = JSON.parse(localStorage.getItem('kupiState')) || null;
+
+        if (!appState || appState.role !== 'owner') {
+            alert("Akses Ditolak! Harap login dari Portal Utama.");
+            window.location.href = "index.html"; // Balik ke halaman login
+        } else {
+            document.getElementById('header-tenant-name').innerText = appState.tenant;
+            loadReport();
+        }
+
+        async function fetchAPI(action, subAction, payload = {}) {
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action, sub_action: subAction, tenant: appState.tenant, ...payload })
+                });
+                return await response.json();
+            } catch (error) { return null; }
+        }
+
+        function logout() { localStorage.removeItem('kupiState'); window.location.href = "index.html"; }
+
+        function switchTab(tabId) {
+            document.getElementById('tab-report').classList.add('hidden-view');
+            document.getElementById('tab-menu').classList.add('hidden-view');
+            document.getElementById('tab-staff').classList.add('hidden-view');
+            document.getElementById(tabId).classList.remove('hidden-view');
+        }
+
+        async function loadReport() {
+            document.getElementById('report-omset').innerText = "CALCULATING...";
+            // Memanggil Node "Calc Report" di n8n
+            const res = await fetchAPI('get', 'report');
+            if(res && res.length > 0) {
+                // Sesuai dengan code logic n8n (total_omset)
+                document.getElementById('report-omset').innerText = `Rp ${parseInt(res[0].json?.total_omset || 0).toLocaleString('id-ID')}`;
+            } else {
+                document.getElementById('report-omset').innerText = "Rp 0";
+            }
+        }
+
+        document.getElementById('form-add-menu').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button'); btn.innerText = '...'; btn.disabled = true;
+            await fetchAPI('insert', 'menu', {
+                name: document.getElementById('menu-name').value,
+                price: document.getElementById('menu-price').value
+            });
+            alert("MENU DITAMBAHKAN!"); e.target.reset();
+            btn.innerText = 'TAMBAH +'; btn.disabled = false;
+        });
+
+        document.getElementById('form-add-staff').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button'); btn.innerText = '...'; btn.disabled = true;
+            await fetchAPI('insert', 'auth', {
+                new_username: document.getElementById('staff-username').value,
+                new_password: document.getElementById('staff-password').value,
+                new_role: 'cashier' // Set hardcode ke cashier
+            });
+            alert("KASIR BERHASIL DIDAFTARKAN!"); e.target.reset();
+            btn.innerText = 'DAFTARKAN KASIR'; btn.disabled = false;
+        });
+    </script>
+</body>
+</html>

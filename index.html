@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KUPICASH - Kasir Warkop</title>
+    <title>KUPICASH - STAFF POS</title>
     
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/sunsetdansenja-arch/BEUNA-WARKOP-WEBAPP/main/logo%20kupicash.png">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
@@ -25,185 +24,187 @@
                         neoBlack: '#111111',
                         neoWhite: '#FFFFFF',
                         neoGray: '#E5E5E5'
+                    },
+                    boxShadow: {
+                        'neo': '8px 8px 0px #111111',
+                        'neo-sm': '4px 4px 0px #111111',
+                        'neo-hover': '12px 12px 0px #111111',
+                        'neo-active': '0px 0px 0px #111111',
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Neo-Brutalism Custom Utilities */
         body { background-color: #FF5000; }
         
         .border-neo { border: 4px solid #111111; }
-        .border-neo-sm { border: 2px solid #111111; }
         .border-neo-b { border-bottom: 4px solid #111111; }
         .border-neo-r { border-right: 4px solid #111111; }
-        .border-neo-t { border-top: 4px solid #111111; }
+        .border-neo-l { border-left: 4px solid #111111; }
         
-        .shadow-neo { box-shadow: 6px 6px 0px #111111; }
-        .shadow-neo-sm { box-shadow: 4px 4px 0px #111111; }
-        
-        .hover-neo:hover { 
-            box-shadow: 8px 8px 0px #111111; 
-            transform: translate(-2px, -2px); 
+        /* Brutalist Interaction */
+        .btn-neo {
+            transition: all 0.1s ease-out;
         }
-        .active-neo:active { 
-            box-shadow: 0px 0px 0px #111111 !important; 
-            transform: translate(6px, 6px) !important; 
+        .btn-neo:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px #111111;
         }
-        
-        /* Input Focus State */
-        .input-neo:focus {
-            background-color: #39FF14;
-            outline: none;
+        .btn-neo:active {
+            transform: translate(8px, 8px) !important;
+            box-shadow: 0px 0px 0px #111111 !important;
         }
 
-        /* Scrollbar Kasar */
-        ::-webkit-scrollbar { width: 12px; border-left: 2px solid #111111; }
+        .input-neo:focus { background-color: #39FF14; outline: none; }
+
+        ::-webkit-scrollbar { width: 12px; border-left: 4px solid #111111; }
         ::-webkit-scrollbar-track { background: #E5E5E5; }
-        ::-webkit-scrollbar-thumb { background: #111111; }
+        ::-webkit-scrollbar-thumb { background: #111111; border-bottom: 4px solid #FF5000; }
 
         .hidden-view { display: none !important; }
+        
+        /* Marquee Animation */
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 15s linear infinite; }
     </style>
 </head>
 <body class="text-neoBlack h-screen w-screen overflow-hidden antialiased selection:bg-neoBlack selection:text-neoGreen">
 
-    <div id="view-login" class="h-full w-full flex items-center justify-center z-50 fixed inset-0 pattern-bg">
-        <div class="bg-neoWhite p-10 w-[400px] border-neo shadow-neo transition-all">
-            
+    <div id="view-login" class="h-full w-full flex items-center justify-center z-50 fixed inset-0">
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#111 2px, transparent 2px); background-size: 30px 30px;"></div>
+        
+        <div class="bg-neoWhite p-10 w-[420px] border-neo shadow-neo relative z-10">
             <div class="flex justify-center mb-8">
-                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/BEUNA-WARKOP-WEBAPP/main/logo%20kupicash.png" alt="KUPICASH Logo" class="w-48 h-auto border-neo shadow-neo hover-neo transition-all object-cover">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/BEUNA-WARKOP-WEBAPP/main/logo%20kupicash.png" alt="KUPICASH" class="w-48 h-auto border-neo shadow-neo-sm object-cover">
             </div>
 
-            <form id="form-login" class="space-y-5">
+            <form id="form-login" class="space-y-6">
                 <div>
-                    <label class="block text-sm font-bold uppercase tracking-widest mb-2 border-neo-b w-max border-b-2">ID Warkop</label>
-                    <input type="text" id="login-tenant" placeholder="adun_kupi" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm transition-all" required value="adun_kupi">
+                    <label class="block text-sm font-bold uppercase tracking-widest mb-2 bg-neoBlack text-neoWhite px-2 py-1 inline-block border-neo">ID WARKOP</label>
+                    <input type="text" id="login-tenant" placeholder="adun_kupi" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm" required>
                 </div>
                 <div>
-                    <label class="block text-sm font-bold uppercase tracking-widest mb-2 border-neo-b w-max border-b-2">Username</label>
-                    <input type="text" id="login-username" placeholder="KASIR1" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm transition-all" required>
+                    <label class="block text-sm font-bold uppercase tracking-widest mb-2 bg-neoBlack text-neoWhite px-2 py-1 inline-block border-neo">USERNAME</label>
+                    <input type="text" id="login-username" placeholder="KASIR1" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm" required>
                 </div>
                 <div>
-                    <label class="block text-sm font-bold uppercase tracking-widest mb-2 border-neo-b w-max border-b-2">Password</label>
-                    <input type="password" id="login-password" placeholder="••••••••" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold input-neo shadow-neo-sm transition-all" required>
+                    <label class="block text-sm font-bold uppercase tracking-widest mb-2 bg-neoBlack text-neoWhite px-2 py-1 inline-block border-neo">PASSWORD</label>
+                    <input type="password" id="login-password" placeholder="••••••••" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold input-neo shadow-neo-sm" required>
                 </div>
 
-                <button type="submit" id="btn-login-submit" class="w-full bg-neoBlack text-neoWhite border-neo px-4 py-4 font-display text-xl uppercase tracking-wider hover:bg-neoOrange hover:text-neoBlack shadow-neo hover-neo active-neo transition-all mt-4 flex justify-center items-center gap-2">
-                    MASUK ->
+                <button type="submit" id="btn-login-submit" class="w-full bg-neoBlack text-neoWhite border-neo px-4 py-5 font-display text-2xl uppercase tracking-wider shadow-neo btn-neo mt-6">
+                    MASUK [ENTER]
                 </button>
-                <p id="login-error" class="bg-neoBlack text-neoOrange font-bold p-3 text-center border-neo mt-4 hidden-view uppercase text-sm"></p>
+                <p id="login-error" class="bg-neoBlack text-neoOrange font-bold p-3 text-center border-neo mt-4 hidden-view uppercase"></p>
             </form>
         </div>
     </div>
 
 
-    <div id="view-kasir" class="h-full w-full flex bg-neoGray hidden-view">
+    <div id="view-kasir" class="h-full w-full flex bg-neoGray hidden-view relative">
         <main class="flex-1 flex flex-col h-full border-neo-r">
-            
-            <header class="flex justify-between items-center px-8 py-5 bg-neoOrange border-neo-b z-10">
+            <header class="flex justify-between items-center px-8 py-5 bg-neoOrange border-neo-b z-10 relative">
                 <div class="flex items-center gap-4">
                     <div class="bg-neoBlack text-neoWhite px-4 py-2 border-neo shadow-neo-sm">
-                        <h1 class="text-2xl font-display uppercase tracking-wider" id="header-kasir-warkop-name">WARKOP</h1>
+                        <h1 class="text-2xl font-display uppercase tracking-wider" id="header-tenant-name">WARKOP</h1>
                     </div>
-                    <span class="bg-neoWhite font-bold px-3 py-1 border-neo-sm uppercase text-sm">POS System</span>
+                    <div class="bg-neoWhite border-neo px-3 py-2 flex items-center gap-2 shadow-neo-sm">
+                        <div class="w-3 h-3 bg-neoGreen rounded-full animate-pulse border border-neoBlack"></div>
+                        <span class="font-bold uppercase text-sm">POS ACTIVE</span>
+                    </div>
                 </div>
-                <div class="flex items-center gap-6">
-                    <div class="h-12 w-12 bg-neoGreen border-neo shadow-neo-sm flex items-center justify-center text-neoBlack font-display text-xl" id="header-kasir-user">K1</div>
-                    <button onclick="logout()" class="bg-neoWhite border-neo px-4 py-2 font-bold hover:bg-neoBlack hover:text-neoWhite active-neo transition-all shadow-neo-sm uppercase"><i class="fa-solid fa-power-off"></i></button>
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleModal('modal-expense')" class="bg-neoWhite border-neo px-4 py-2 font-bold shadow-neo-sm btn-neo uppercase text-sm">
+                        <i class="fa-solid fa-money-bill-wave mr-2"></i>KAS KELUAR
+                    </button>
+                    <button onclick="loadHistory()" class="bg-neoWhite border-neo px-4 py-2 font-bold shadow-neo-sm btn-neo uppercase text-sm">
+                        <i class="fa-solid fa-clock-rotate-left mr-2"></i>HISTORY
+                    </button>
+                    <div class="h-11 w-11 bg-neoGreen border-neo shadow-neo-sm flex items-center justify-center text-neoBlack font-display text-xl" id="header-user-avatar">K1</div>
+                    <button onclick="logout()" class="bg-neoBlack text-neoWhite border-neo px-4 py-2 font-bold hover:bg-neoOrange hover:text-neoBlack shadow-neo-sm btn-neo uppercase"><i class="fa-solid fa-power-off"></i></button>
                 </div>
             </header>
 
-            <div class="flex-1 overflow-y-auto p-8 bg-neoWhite">
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="menu-grid">
-                    <p class="col-span-full text-center font-bold text-xl border-neo p-10 bg-neoOrange uppercase">Memuat Menu...</p>
+            <div class="bg-neoBlack text-neoGreen py-2 border-neo-b overflow-hidden font-display text-sm tracking-widest border-t-0">
+                <div class="animate-marquee">⚡ KUPICASH NEO-BRUTALISM SYSTEM ONLINE ⚡ PASTIKAN INPUT NAMA CUSTOMER SEBELUM CHECKOUT ⚡</div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-8 bg-neoWhite" style="background-image: radial-gradient(#E5E5E5 2px, transparent 2px); background-size: 20px 20px;">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="menu-grid">
+                    <div class="col-span-full bg-neoOrange border-neo p-8 text-center shadow-neo font-display text-xl">MEMUAT DATABASE...</div>
                 </div>
             </div>
         </main>
 
-        <aside class="w-[400px] bg-neoWhite h-full flex flex-col z-20">
-            <div class="p-6 border-neo-b bg-neoGreen">
-                <h2 class="text-2xl font-display uppercase tracking-wide mb-4">CART</h2>
-                <div class="relative">
-                    <input type="text" id="customerName" placeholder="NAMA CUSTOMER" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm transition-all">
+        <aside class="w-[420px] bg-neoWhite h-full flex flex-col z-20">
+            <div class="p-6 border-neo-b bg-neoGreen relative overflow-hidden">
+                <div class="absolute -right-4 -bottom-4 text-neoBlack opacity-20"><i class="fa-solid fa-cart-shopping text-8xl"></i></div>
+                <h2 class="text-3xl font-display uppercase tracking-wide mb-4 relative z-10" id="cart-title">NEW ORDER</h2>
+                <div class="relative z-10">
+                    <input type="text" id="customerName" placeholder="NAMA CUSTOMER" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm">
                 </div>
             </div>
 
             <div class="flex-1 overflow-y-auto p-6 space-y-4 bg-neoGray border-neo-b" id="cart-list">
-                <div class="bg-neoWhite border-neo p-4 text-center font-bold uppercase">Keranjang Kosong</div>
+                <div class="bg-neoWhite border-neo p-6 text-center font-bold uppercase shadow-neo-sm">KOSONG</div>
             </div>
 
             <div class="p-6 bg-neoWhite">
-                <div class="flex gap-2 mb-6">
-                    <button class="flex-1 bg-neoBlack text-neoWhite border-neo py-3 font-bold uppercase shadow-neo-sm">CASH</button>
+                <div id="edit-mode-badge" class="hidden-view bg-neoBlack text-neoWhite border-neo p-2 mb-4 text-center font-bold text-sm uppercase animate-pulse">
+                    ⚠️ MODE EDIT TRANSAKSI
                 </div>
+
                 <div class="flex items-center justify-between mb-6 bg-neoGreen border-neo p-4 shadow-neo-sm">
                     <span class="text-xl font-bold uppercase">TOTAL</span>
                     <span class="text-3xl font-display" id="total-price">Rp 0</span>
                 </div>
-                <button id="btn-checkout" class="w-full bg-neoOrange text-neoBlack border-neo py-5 font-display text-2xl tracking-wider shadow-neo hover-neo active-neo transition-all uppercase">
-                    BAYAR SEKARANG
+                <button id="btn-checkout" class="w-full bg-neoOrange text-neoBlack border-neo py-5 font-display text-2xl tracking-wider shadow-neo btn-neo uppercase">
+                    PROSES [SPACE]
                 </button>
             </div>
         </aside>
     </div>
 
-
-    <div id="view-owner" class="h-full w-full flex flex-col bg-neoWhite hidden-view overflow-hidden">
-        <header class="flex justify-between items-center px-8 py-5 bg-neoGreen border-neo-b z-10">
-            <div class="flex items-center gap-4">
-                <div class="bg-neoBlack text-neoWhite px-4 py-2 border-neo shadow-neo-sm">
-                    <h1 class="text-2xl font-display uppercase tracking-wider" id="header-owner-warkop-name">WARKOP</h1>
+    <div id="modal-expense" class="hidden-view fixed inset-0 z-[100] bg-neoBlack/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-neoWhite border-neo shadow-neo p-8 w-full max-w-md relative">
+            <button onclick="toggleModal('modal-expense')" class="absolute -top-4 -right-4 bg-neoOrange border-neo w-10 h-10 flex items-center justify-center font-bold text-xl shadow-neo btn-neo">X</button>
+            <h2 class="text-2xl font-display uppercase mb-6 border-neo-b pb-2">INPUT KAS KELUAR</h2>
+            <form id="form-expense" class="space-y-4">
+                <div>
+                    <label class="block font-bold uppercase mb-1">Kategori</label>
+                    <select id="exp-category" class="w-full bg-neoGray border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm">
+                        <option value="Operasional">Operasional (Es, Gas, Listrik)</option>
+                        <option value="Bahan Baku">Bahan Baku (Gula, Kopi)</option>
+                        <option value="Lainnya">Lain-lain</option>
+                    </select>
                 </div>
-                <span class="bg-neoOrange font-bold px-3 py-1 border-neo-sm uppercase text-sm text-neoBlack shadow-neo-sm">Owner Panel</span>
-            </div>
-            <button onclick="logout()" class="bg-neoWhite border-neo px-6 py-2 font-bold hover:bg-neoBlack hover:text-neoWhite active-neo transition-all shadow-neo-sm uppercase">
-                <i class="fa-solid fa-power-off mr-2"></i>Keluar
-            </button>
-        </header>
-
-        <main class="flex-1 p-8 overflow-y-auto bg-neoGray">
-            
-            <div class="bg-neoWhite p-8 border-neo shadow-neo mb-10 max-w-5xl mx-auto">
-                <div class="bg-neoBlack text-neoWhite p-3 border-neo inline-block mb-6 shadow-neo-sm">
-                    <h2 class="text-xl font-display uppercase tracking-wide">TAMBAH MENU</h2>
+                <div>
+                    <label class="block font-bold uppercase mb-1">Deskripsi</label>
+                    <input type="text" id="exp-desc" placeholder="Contoh: Beli Token Listrik" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm" required>
                 </div>
-                <form id="form-add-menu" class="flex gap-6 items-end">
-                    <div class="flex-1">
-                        <label class="block text-sm font-bold uppercase mb-2">Nama Menu</label>
-                        <input type="text" id="new-menu-name" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm transition-all" required>
-                    </div>
-                    <div class="w-64">
-                        <label class="block text-sm font-bold uppercase mb-2">Harga (Rp)</label>
-                        <input type="number" id="new-menu-price" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold input-neo shadow-neo-sm transition-all" required>
-                    </div>
-                    <button type="submit" id="btn-add-menu" class="bg-neoOrange text-neoBlack border-neo px-8 py-3 h-[52px] font-bold uppercase shadow-neo hover-neo active-neo transition-all">
-                        TAMBAH +
-                    </button>
-                </form>
-            </div>
-
-            <div class="bg-neoWhite p-8 border-neo shadow-neo max-w-5xl mx-auto">
-                <div class="bg-neoBlack text-neoWhite p-3 border-neo inline-block mb-6 shadow-neo-sm">
-                    <h2 class="text-xl font-display uppercase tracking-wide">DATABASE MENU</h2>
+                <div>
+                    <label class="block font-bold uppercase mb-1">Nominal (Rp)</label>
+                    <input type="number" id="exp-amount" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold input-neo shadow-neo-sm" required>
                 </div>
-                <div class="border-neo overflow-hidden bg-neoWhite">
-                    <table class="w-full text-left border-collapse">
-                        <thead class="bg-neoOrange border-neo-b">
-                            <tr>
-                                <th class="p-4 font-display text-lg uppercase border-neo-r">NAMA MENU</th>
-                                <th class="p-4 font-display text-lg uppercase border-neo-r">HARGA</th>
-                                <th class="p-4 font-display text-lg uppercase">STATUS</th>
-                            </tr>
-                        </thead>
-                        <tbody id="owner-menu-list">
-                            <tr><td colspan="3" class="p-8 text-center font-bold uppercase border-neo-b">Memuat Data...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
+                <button type="submit" id="btn-submit-exp" class="w-full bg-neoBlack text-neoWhite border-neo py-4 font-bold uppercase shadow-neo btn-neo mt-4">SIMPAN PENGELUARAN</button>
+            </form>
+        </div>
     </div>
+
+    <div id="modal-history" class="hidden-view fixed inset-0 z-[100] bg-neoBlack/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-neoWhite border-neo shadow-neo p-6 w-full max-w-3xl relative flex flex-col h-[80vh]">
+            <button onclick="toggleModal('modal-history')" class="absolute -top-4 -right-4 bg-neoOrange border-neo w-10 h-10 flex items-center justify-center font-bold text-xl shadow-neo btn-neo">X</button>
+            <div class="bg-neoGreen border-neo px-4 py-3 mb-6 shadow-neo-sm">
+                <h2 class="text-2xl font-display uppercase">HISTORY TRANSAKSI (H-1)</h2>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto border-neo bg-neoGray p-4 space-y-4" id="history-list">
+                <div class="text-center font-bold p-4">Memuat data...</div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         const WEBHOOK_URL = 'https://n8n-mzbmiib3etk4.kangkung.sumopod.my.id/webhook/beuna-api';
@@ -211,42 +212,64 @@
         let appState = { tenant: null, username: null, role: null };
         let products = [];
         let cart = [];
+        let editingTransactionId = null; // Menyimpan ID jika sedang mode edit
 
-        async function fetchBeunaAPI(action, payload = {}) {
+        // Inisialisasi: Cek LocalStorage saat Web Dibuka
+        function initApp() {
+            const savedState = localStorage.getItem('kupiState');
+            if (savedState) {
+                appState = JSON.parse(savedState);
+                if(appState.role === 'owner') {
+                    alert("Akses Ditolak: Halaman ini khusus Kasir. Owner harap login di owner.html");
+                    logout();
+                } else {
+                    setupKasirDashboard();
+                }
+            } else {
+                switchView('view-login');
+            }
+        }
+
+        // --- CORE API HELPER ---
+        async function fetchBeunaAPI(action, subAction, payload = {}) {
             try {
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action, tenant: appState.tenant, ...payload })
+                    body: JSON.stringify({ action: action, sub_action: subAction, tenant: appState.tenant, ...payload })
                 });
                 return await response.json();
             } catch (error) {
-                console.error(`Error pada API (${action}):`, error);
+                console.error(`API Error:`, error);
                 return null;
             }
         }
 
+        // --- UI HELPERS ---
         function switchView(viewId) {
             document.getElementById('view-login').classList.add('hidden-view');
             document.getElementById('view-kasir').classList.add('hidden-view');
-            document.getElementById('view-owner').classList.add('hidden-view');
             document.getElementById(viewId).classList.remove('hidden-view');
         }
+        function toggleModal(modalId) {
+            document.getElementById(modalId).classList.toggle('hidden-view');
+        }
 
+        // --- AUTHENTICATION ---
         document.getElementById('form-login').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-login-submit');
             const errorText = document.getElementById('login-error');
-            const tenantInput = document.getElementById('login-tenant').value.trim();
+            
+            appState.tenant = document.getElementById('login-tenant').value.trim();
             const userInput = document.getElementById('login-username').value.trim();
             const passInput = document.getElementById('login-password').value;
 
-            btn.innerHTML = 'LOADING...';
-            btn.disabled = true;
+            btn.innerHTML = 'LOADING...'; btn.disabled = true;
             errorText.classList.add('hidden-view');
-            appState.tenant = tenantInput;
 
-            const res = await fetchBeunaAPI('login', { username: userInput, password: passInput });
+            // PAYLOAD BARU: action 'get', sub_action: 'auth'
+            const res = await fetchBeunaAPI('get', 'auth', { username: userInput, password: passInput });
             
             if (res && res.length > 0) {
                 const user = res[0];
@@ -254,97 +277,94 @@
                 appState.role = user.ROLE ? user.ROLE.toLowerCase() : 'cashier';
 
                 if (appState.role === 'owner') {
-                    document.getElementById('header-owner-warkop-name').innerText = appState.tenant;
-                    switchView('view-owner');
-                    loadMenuForOwner();
+                    errorText.innerText = "HALAMAN INI KHUSUS KASIR.";
+                    errorText.classList.remove('hidden-view');
                 } else {
-                    document.getElementById('header-kasir-warkop-name').innerText = appState.tenant;
-                    document.getElementById('header-kasir-user').innerText = appState.username.substring(0, 2).toUpperCase();
-                    switchView('view-kasir');
-                    loadMenuForKasir();
+                    // Simpan sesi ke LocalStorage
+                    localStorage.setItem('kupiState', JSON.stringify(appState));
+                    setupKasirDashboard();
                 }
             } else {
                 errorText.innerText = "LOGIN GAGAL! CEK KREDENSIAL.";
                 errorText.classList.remove('hidden-view');
-                appState.tenant = null;
             }
-
-            btn.innerHTML = 'MASUK ->';
-            btn.disabled = false;
+            btn.innerHTML = 'MASUK [ENTER]'; btn.disabled = false;
         });
 
         function logout() {
+            localStorage.removeItem('kupiState');
             appState = { tenant: null, username: null, role: null };
-            cart = []; products = [];
+            cart = []; resetEditMode();
             document.getElementById('form-login').reset();
             switchView('view-login');
         }
 
-        async function loadMenuForKasir() {
-            const data = await fetchBeunaAPI('get_menu');
+        function setupKasirDashboard() {
+            document.getElementById('header-tenant-name').innerText = appState.tenant;
+            document.getElementById('header-user-avatar').innerText = appState.username.substring(0, 2).toUpperCase();
+            switchView('view-kasir');
+            loadMenu();
+        }
+
+        // --- MENU & CART LOGIC ---
+        async function loadMenu() {
+            // PAYLOAD BARU: action 'get', sub_action: 'menu'
+            const data = await fetchBeunaAPI('get', 'menu');
             const grid = document.getElementById('menu-grid');
+            
             if (data && data.length > 0) {
-                products = data;
-                grid.innerHTML = ''; 
+                products = data; grid.innerHTML = ''; 
                 products.forEach(p => {
                     if(p.IS_ACTIVE === "false" || p.IS_ACTIVE === false) return;
                     const div = document.createElement('div');
-                    div.className = 'bg-neoWhite border-neo p-5 shadow-neo hover-neo transition-all cursor-pointer flex flex-col justify-between h-48 relative overflow-hidden group';
+                    div.className = 'bg-neoWhite border-neo p-5 shadow-neo btn-neo cursor-pointer flex flex-col justify-between h-44 relative group';
                     div.onclick = () => addToCart(p);
                     div.innerHTML = `
-                        <div class="absolute top-0 right-0 bg-neoGreen border-neo-b border-neo-l p-2 transform translate-x-full group-hover:translate-x-0 transition-transform font-bold border-black">
-                            <i class="fa-solid fa-plus"></i> ADD
-                        </div>
-                        <div class="bg-neoOrange border-neo w-12 h-12 flex items-center justify-center shadow-neo-sm mb-4">
-                            <i class="fa-solid fa-mug-hot text-2xl text-neoBlack"></i>
+                        <div class="absolute top-0 right-0 bg-neoBlack text-neoGreen border-neo-b border-neo-l border-black p-2 opacity-0 group-hover:opacity-100 transition-opacity font-bold text-sm">
+                            + ADD
                         </div>
                         <div>
-                            <h3 class="font-display text-2xl uppercase tracking-tight leading-none mb-2">${p.NAME}</h3>
-                            <p class="bg-neoBlack text-neoGreen font-bold inline-block px-2 py-1 text-sm border-neo-sm">Rp ${parseInt(p.PRICE||0).toLocaleString('id-ID')}</p>
+                            <h3 class="font-display text-2xl uppercase tracking-tight leading-none mb-3 pr-8">${p.NAME}</h3>
+                            <span class="bg-neoOrange text-neoBlack border-neo-sm font-bold px-2 py-1 text-sm shadow-neo-sm">Rp ${parseInt(p.PRICE||0).toLocaleString('id-ID')}</span>
                         </div>
                     `;
                     grid.appendChild(div);
                 });
             } else {
-                grid.innerHTML = '<div class="col-span-full text-center bg-neoWhite border-neo p-10 font-bold uppercase shadow-neo">Menu Kosong</div>';
+                grid.innerHTML = '<div class="col-span-full bg-neoWhite border-neo p-8 text-center font-bold uppercase">DATABASE MENU KOSONG</div>';
             }
         }
 
         function addToCart(product) {
             const existing = cart.find(i=>i.product_name===product.NAME);
-            const pr=parseInt(product.PRICE||0);
-            if(existing){
-                existing.quantity+=1;
-                existing.subtotal=existing.quantity*pr;
-            }else{
-                cart.push({product_name:product.NAME, quantity:1, subtotal:pr});
-            }
+            const pr = parseInt(product.PRICE||0);
+            if(existing) { existing.quantity+=1; existing.subtotal=existing.quantity*pr; }
+            else { cart.push({product_name:product.NAME, quantity:1, subtotal:pr}); }
             renderCart();
         }
 
         function renderCart() {
-            const cl=document.getElementById('cart-list');
-            const tt=document.getElementById('total-price');
+            const cl = document.getElementById('cart-list');
+            const tt = document.getElementById('total-price');
             if(cart.length===0){
-                cl.innerHTML='<div class="bg-neoWhite border-neo p-4 text-center font-bold uppercase">Keranjang Kosong</div>';
+                cl.innerHTML='<div class="bg-neoWhite border-neo p-5 text-center font-bold uppercase shadow-neo-sm">KERANJANG KOSONG</div>';
                 tt.innerText='Rp 0';
                 return;
             }
-            cl.innerHTML='';
-            let total=0;
+            cl.innerHTML=''; let total=0;
             cart.forEach((i,idx)=>{
                 total+=i.subtotal;
                 const d=document.createElement('div');
                 d.className='bg-neoWhite border-neo p-4 shadow-neo-sm flex items-center justify-between';
                 d.innerHTML=`
                     <div class="flex-1 pr-4">
-                        <h4 class="font-display text-lg uppercase leading-none mb-1">${i.product_name}</h4>
-                        <p class="font-bold text-neoOrange">Rp ${i.subtotal.toLocaleString('id-ID')}</p>
+                        <h4 class="font-display text-lg uppercase leading-none mb-2">${i.product_name}</h4>
+                        <span class="font-bold text-neoWhite bg-neoBlack px-2 border-neo-sm">Rp ${i.subtotal.toLocaleString('id-ID')}</span>
                     </div>
-                    <div class="flex items-center gap-2 border-neo bg-neoGray">
-                        <button onclick="updateQuantity(${idx},-1)" class="w-8 h-8 flex items-center justify-center font-bold bg-neoWhite hover:bg-neoOrange border-neo-r transition-colors">-</button>
-                        <span class="w-6 text-center font-bold">${i.quantity}</span>
-                        <button onclick="updateQuantity(${idx},1)" class="w-8 h-8 flex items-center justify-center font-bold bg-neoWhite hover:bg-neoGreen border-neo-l transition-colors">+</button>
+                    <div class="flex items-center border-neo bg-neoWhite shadow-neo-sm">
+                        <button onclick="updateQuantity(${idx},-1)" class="w-8 h-8 font-bold bg-neoOrange border-neo-r hover:bg-neoBlack hover:text-neoWhite transition-colors">-</button>
+                        <span class="w-8 text-center font-bold">${i.quantity}</span>
+                        <button onclick="updateQuantity(${idx},1)" class="w-8 h-8 font-bold bg-neoGreen border-neo-l hover:bg-neoBlack hover:text-neoWhite transition-colors">+</button>
                     </div>
                 `;
                 cl.appendChild(d);
@@ -353,90 +373,136 @@
         }
 
         window.updateQuantity = function(idx, chg) {
-            cart[idx].quantity+=chg;
-            if(cart[idx].quantity<=0) cart.splice(idx,1);
-            else{
-                const p=products.find(x=>x.NAME===cart[idx].product_name);
-                cart[idx].subtotal=cart[idx].quantity*parseInt(p.PRICE);
+            cart[idx].quantity += chg;
+            if(cart[idx].quantity <= 0) cart.splice(idx,1);
+            else {
+                const p = products.find(x => x.NAME === cart[idx].product_name);
+                if(p) cart[idx].subtotal = cart[idx].quantity * parseInt(p.PRICE);
             }
             renderCart();
         }
-        
+
+        // --- SUBMIT CHECKOUT (BARU & EDIT) ---
         document.getElementById('btn-checkout').addEventListener('click', async () => {
             const customerName = document.getElementById('customerName').value;
             if (cart.length === 0) return alert("KERANJANG KOSONG!");
             if (!customerName) return alert("NAMA CUSTOMER WAJIB DIISI!");
             
             const btn = document.getElementById('btn-checkout');
-            const og = btn.innerHTML; 
-            btn.innerHTML='MEMPROSES...'; 
-            btn.disabled=true;
+            const ogText = btn.innerText; btn.innerText='PROSES...'; btn.disabled=true;
             
-            const res = await fetchBeunaAPI('create_order', { 
-                customer_name: customerName, 
-                cashier_id: appState.username, 
-                total_amount: cart.reduce((s,i)=>s+i.subtotal,0), 
-                order_items: cart 
-            });
-            
-            if (res) { 
-                alert("TRANSAKSI BERHASIL DICATAT!"); 
-                cart=[]; 
-                document.getElementById('customerName').value=''; 
-                renderCart(); 
-            }
-            btn.innerHTML=og; 
-            btn.disabled=false;
-        });
+            const totalAmount = cart.reduce((s,i)=>s+i.subtotal,0);
+            let res;
 
-        // --- MODUL: OWNER (MANAJEMEN MENU) ---
-        async function loadMenuForOwner() {
-            const tbody = document.getElementById('owner-menu-list');
-            tbody.innerHTML = '<tr><td colspan="3" class="p-6 text-center font-bold uppercase border-neo-b bg-neoGray">MEMUAT DATA...</td></tr>';
-            
-            const data = await fetchBeunaAPI('get_menu');
-            if (data && data.length > 0) {
-                tbody.innerHTML = '';
-                data.forEach(p => {
-                    const tr = document.createElement('tr');
-                    tr.className = 'border-neo-b bg-neoWhite hover:bg-neoGreen transition-colors';
-                    tr.innerHTML = `
-                        <td class="p-4 font-bold uppercase border-neo-r">${p.NAME}</td>
-                        <td class="p-4 font-bold border-neo-r text-neoOrange">Rp ${parseInt(p.PRICE||0).toLocaleString('id-ID')}</td>
-                        <td class="p-4">
-                            <span class="bg-neoBlack text-neoWhite px-3 py-1 font-bold text-xs uppercase border-neo-sm">Tersedia</span>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
+            if (editingTransactionId) {
+                // JIKA MODE EDIT: action 'update', sub_action: 'order'
+                res = await fetchBeunaAPI('update', 'order', {
+                    transaction_id: editingTransactionId,
+                    total_amount: totalAmount,
+                    order_items: cart
                 });
             } else {
-                tbody.innerHTML = '<tr><td colspan="3" class="p-6 text-center font-bold uppercase border-neo-b bg-neoOrange">DATABASE KOSONG</td></tr>';
+                // JIKA TRANSAKSI BARU: action 'insert', sub_action: 'order'
+                res = await fetchBeunaAPI('insert', 'order', { 
+                    customer_name: customerName, 
+                    cashier_id: appState.username, 
+                    total_amount: totalAmount, 
+                    order_items: cart 
+                });
+            }
+            
+            if (res) { 
+                alert(editingTransactionId ? "REVISI BERHASIL!" : "TRANSAKSI SUKSES!"); 
+                cart=[]; document.getElementById('customerName').value=''; 
+                resetEditMode(); renderCart(); 
+            } else {
+                alert("GAGAL TERKONEKSI SERVER!");
+            }
+            btn.innerText = ogText; btn.disabled=false;
+        });
+
+        // --- EXPENSE LOGIC ---
+        document.getElementById('form-expense').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit-exp');
+            btn.innerText = 'MENYIMPAN...'; btn.disabled = true;
+
+            // PAYLOAD: action 'insert', sub_action: 'expense'
+            const res = await fetchBeunaAPI('insert', 'expense', {
+                kategori: document.getElementById('exp-category').value,
+                deskripsi: document.getElementById('exp-desc').value,
+                nominal: document.getElementById('exp-amount').value
+            });
+
+            if (res) {
+                alert("PENGELUARAN TERCATAT!");
+                document.getElementById('form-expense').reset();
+                toggleModal('modal-expense');
+            }
+            btn.innerText = 'SIMPAN PENGELUARAN'; btn.disabled = false;
+        });
+
+        // --- HISTORY & EDIT LOGIC ---
+        async function loadHistory() {
+            toggleModal('modal-history');
+            const list = document.getElementById('history-list');
+            list.innerHTML = '<div class="text-center font-bold p-4">Memuat data n8n...</div>';
+
+            // PAYLOAD: action 'get', sub_action: 'order'
+            const data = await fetchBeunaAPI('get', 'order');
+            
+            if (data && data.length > 0) {
+                list.innerHTML = '';
+                data.forEach(trx => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-neoWhite border-neo p-4 shadow-neo-sm flex justify-between items-center';
+                    const isPaid = trx.PAYMENT_STATUS === 'paid';
+                    
+                    div.innerHTML = `
+                        <div>
+                            <p class="font-bold uppercase text-lg">${trx.CUSTOMER_NAME}</p>
+                            <p class="text-sm font-bold text-neoOrange">Rp ${parseInt(trx.TOTAL_AMOUNT).toLocaleString('id-ID')} | <span class="${isPaid ? 'text-neoGreen' : 'text-red-500'} bg-neoBlack px-1">${trx.PAYMENT_STATUS}</span></p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick='loadToEdit(${JSON.stringify(trx)})' class="bg-neoOrange border-neo font-bold px-3 py-2 btn-neo shadow-neo-sm text-sm">REVISI ORDER</button>
+                        </div>
+                    `;
+                    list.appendChild(div);
+                });
+            } else {
+                list.innerHTML = '<div class="text-center font-bold p-4 border-neo bg-neoWhite">TIDAK ADA TRANSAKSI</div>';
             }
         }
 
-        document.getElementById('form-add-menu').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('btn-add-menu');
-            const nameInput = document.getElementById('new-menu-name');
-            const priceInput = document.getElementById('new-menu-price');
-
-            btn.innerText = '...'; btn.disabled = true;
-
-            const res = await fetchBeunaAPI('add_menu', { 
-                name: nameInput.value, 
-                price: priceInput.value,
-                is_active: "true"
-            });
-
-            if(res) {
-                nameInput.value = ''; priceInput.value = '';
-                loadMenuForOwner(); 
-            } else {
-                alert("GAGAL MENAMBAH MENU. CEK KONEKSI N8N.");
+        window.loadToEdit = function(trx) {
+            try {
+                cart = JSON.parse(trx.ORDER_ITEMS);
+                editingTransactionId = trx.id; // Menyimpan RowID dari n8n
+                document.getElementById('customerName').value = trx.CUSTOMER_NAME;
+                document.getElementById('customerName').disabled = true; // Nama tidak bisa diedit
+                
+                // Ubah UI menjadi mode Edit
+                document.getElementById('cart-title').innerText = "EDIT ORDER";
+                document.getElementById('edit-mode-badge').classList.remove('hidden-view');
+                document.getElementById('btn-checkout').innerText = "UPDATE ORDER";
+                
+                renderCart();
+                toggleModal('modal-history');
+            } catch (e) {
+                alert("Gagal membaca data keranjang transaksi ini.");
             }
-            btn.innerText = 'TAMBAH +'; btn.disabled = false;
-        });
+        }
 
+        function resetEditMode() {
+            editingTransactionId = null;
+            document.getElementById('customerName').disabled = false;
+            document.getElementById('cart-title').innerText = "NEW ORDER";
+            document.getElementById('edit-mode-badge').classList.add('hidden-view');
+            document.getElementById('btn-checkout').innerText = "PROSES [SPACE]";
+        }
+
+        // Run On Load
+        initApp();
     </script>
 </body>
 </html>

@@ -3,173 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beuna Rakan Warkop</title>
+    <title>KUPICASH - Kasir Warkop</title>
+    
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/sunsetdansenja-arch/BEUNA-WARKOP-WEBAPP/main/logo%20kupicash.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                        sans: ['"Space Grotesk"', 'Arial Black', 'sans-serif'],
+                        display: ['"Archivo Black"', 'Impact', 'sans-serif'],
                     },
                     colors: {
-                        appleGray: '#F5F5F7',
-                        appleDark: '#1D1D1F',
-                        appleRed: '#FF3B30',
-                        appleRedHover: '#E3332A'
+                        neoOrange: '#FF5000',
+                        neoGreen: '#39FF14',
+                        neoBlack: '#111111',
+                        neoWhite: '#FFFFFF',
+                        neoGray: '#E5E5E5'
                     }
                 }
             }
         }
     </script>
     <style>
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #D1D5DB; }
+        /* Neo-Brutalism Custom Utilities */
+        body { background-color: #FF5000; }
+        
+        .border-neo { border: 4px solid #111111; }
+        .border-neo-sm { border: 2px solid #111111; }
+        .border-neo-b { border-bottom: 4px solid #111111; }
+        .border-neo-r { border-right: 4px solid #111111; }
+        .border-neo-t { border-top: 4px solid #111111; }
+        
+        .shadow-neo { box-shadow: 6px 6px 0px #111111; }
+        .shadow-neo-sm { box-shadow: 4px 4px 0px #111111; }
+        
+        .hover-neo:hover { 
+            box-shadow: 8px 8px 0px #111111; 
+            transform: translate(-2px, -2px); 
+        }
+        .active-neo:active { 
+            box-shadow: 0px 0px 0px #111111 !important; 
+            transform: translate(6px, 6px) !important; 
+        }
+        
+        /* Input Focus State */
+        .input-neo:focus {
+            background-color: #39FF14;
+            outline: none;
+        }
+
+        /* Scrollbar Kasar */
+        ::-webkit-scrollbar { width: 12px; border-left: 2px solid #111111; }
+        ::-webkit-scrollbar-track { background: #E5E5E5; }
+        ::-webkit-scrollbar-thumb { background: #111111; }
+
         .hidden-view { display: none !important; }
     </style>
 </head>
-<body class="bg-appleGray text-appleDark h-screen w-screen overflow-hidden antialiased selection:bg-appleRed selection:text-white">
+<body class="text-neoBlack h-screen w-screen overflow-hidden antialiased selection:bg-neoBlack selection:text-neoGreen">
 
-    <!-- ========================================== -->
-    <!-- VIEW 1: PORTAL LOGIN -->
-    <!-- ========================================== -->
-    <div id="view-login" class="h-full w-full flex items-center justify-center bg-white/50 backdrop-blur-sm z-50 fixed inset-0">
-        <div class="bg-white p-10 rounded-3xl shadow-2xl w-96 border border-gray-100">
-            <div class="text-center mb-8">
-                <div class="bg-appleRed text-white w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-appleRed/30">
-                    <i class="fa-solid fa-mug-hot text-3xl"></i>
-                </div>
-                <h1 class="text-2xl font-bold tracking-tight">Beuna Rakan Warkop</h1>
-                <p class="text-gray-500 text-sm mt-1">Sistem Manajemen Kasir & SaaS</p>
+    <div id="view-login" class="h-full w-full flex items-center justify-center z-50 fixed inset-0 pattern-bg">
+        <div class="bg-neoWhite p-10 w-[400px] border-neo shadow-neo transition-all">
+            
+            <div class="flex justify-center mb-8">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/BEUNA-WARKOP-WEBAPP/main/logo%20kupicash.png" alt="KUPICASH Logo" class="w-48 h-auto border-neo shadow-neo hover-neo transition-all object-cover">
             </div>
 
-            <form id="form-login" class="space-y-4">
-                <!-- Input Tenant -->
+            <form id="form-login" class="space-y-5">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">ID Warkop (Tenant)</label>
-                    <input type="text" id="login-tenant" placeholder="contoh: adun_kupi" class="w-full bg-appleGray rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-appleRed/50 transition" required value="adun_kupi">
+                    <label class="block text-sm font-bold uppercase tracking-widest mb-2 border-neo-b w-max border-b-2">ID Warkop</label>
+                    <input type="text" id="login-tenant" placeholder="adun_kupi" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm transition-all" required value="adun_kupi">
                 </div>
-                <!-- Input Username -->
                 <div>
-                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Username</label>
-                    <input type="text" id="login-username" placeholder="owner / kasir1" class="w-full bg-appleGray rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-appleRed/50 transition" required>
+                    <label class="block text-sm font-bold uppercase tracking-widest mb-2 border-neo-b w-max border-b-2">Username</label>
+                    <input type="text" id="login-username" placeholder="KASIR1" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm transition-all" required>
                 </div>
-                <!-- Input Password -->
                 <div>
-                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Password</label>
-                    <input type="password" id="login-password" placeholder="••••••••" class="w-full bg-appleGray rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-appleRed/50 transition" required>
+                    <label class="block text-sm font-bold uppercase tracking-widest mb-2 border-neo-b w-max border-b-2">Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold input-neo shadow-neo-sm transition-all" required>
                 </div>
 
-                <button type="submit" id="btn-login-submit" class="w-full bg-appleDark hover:bg-black text-white rounded-xl py-3 font-bold mt-4 shadow-md transition flex justify-center items-center gap-2">
-                    Masuk
+                <button type="submit" id="btn-login-submit" class="w-full bg-neoBlack text-neoWhite border-neo px-4 py-4 font-display text-xl uppercase tracking-wider hover:bg-neoOrange hover:text-neoBlack shadow-neo hover-neo active-neo transition-all mt-4 flex justify-center items-center gap-2">
+                    MASUK ->
                 </button>
-                <p id="login-error" class="text-appleRed text-sm text-center font-medium mt-2 hidden-view"></p>
+                <p id="login-error" class="bg-neoBlack text-neoOrange font-bold p-3 text-center border-neo mt-4 hidden-view uppercase text-sm"></p>
             </form>
         </div>
     </div>
 
 
-    <!-- ========================================== -->
-    <!-- VIEW 2: DASHBOARD KASIR -->
-    <!-- ========================================== -->
-    <div id="view-kasir" class="h-full w-full flex hidden-view">
-        <main class="flex-1 flex flex-col h-full">
-            <header class="flex justify-between items-center px-8 py-6 bg-white/60 backdrop-blur-md border-b border-gray-100 z-10">
-                <div>
-                    <h1 class="text-2xl font-bold tracking-tight" id="header-kasir-warkop-name">Warkop</h1>
-                    <p class="text-sm text-gray-500 font-medium">Dashboard Kasir</p>
-                </div>
+    <div id="view-kasir" class="h-full w-full flex bg-neoGray hidden-view">
+        <main class="flex-1 flex flex-col h-full border-neo-r">
+            
+            <header class="flex justify-between items-center px-8 py-5 bg-neoOrange border-neo-b z-10">
                 <div class="flex items-center gap-4">
-                    <button onclick="logout()" class="text-gray-400 hover:text-appleRed transition"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
-                    <div class="h-10 w-10 bg-gradient-to-tr from-appleRed to-red-400 rounded-full flex items-center justify-center text-white font-bold shadow-md cursor-pointer" id="header-kasir-user">K1</div>
+                    <div class="bg-neoBlack text-neoWhite px-4 py-2 border-neo shadow-neo-sm">
+                        <h1 class="text-2xl font-display uppercase tracking-wider" id="header-kasir-warkop-name">WARKOP</h1>
+                    </div>
+                    <span class="bg-neoWhite font-bold px-3 py-1 border-neo-sm uppercase text-sm">POS System</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="h-12 w-12 bg-neoGreen border-neo shadow-neo-sm flex items-center justify-center text-neoBlack font-display text-xl" id="header-kasir-user">K1</div>
+                    <button onclick="logout()" class="bg-neoWhite border-neo px-4 py-2 font-bold hover:bg-neoBlack hover:text-neoWhite active-neo transition-all shadow-neo-sm uppercase"><i class="fa-solid fa-power-off"></i></button>
                 </div>
             </header>
 
-            <div class="flex-1 overflow-y-auto px-8 pb-8 pt-6">
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="menu-grid">
-                    <p class="col-span-full text-center text-gray-400 py-10">Memuat menu...</p>
+            <div class="flex-1 overflow-y-auto p-8 bg-neoWhite">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="menu-grid">
+                    <p class="col-span-full text-center font-bold text-xl border-neo p-10 bg-neoOrange uppercase">Memuat Menu...</p>
                 </div>
             </div>
         </main>
 
-        <aside class="w-96 bg-white h-full shadow-[-10px_0_30px_rgba(0,0,0,0.03)] flex flex-col z-20 relative">
-            <div class="p-6 border-b border-gray-100">
-                <h2 class="text-xl font-bold mb-4">Rincian Pesanan</h2>
+        <aside class="w-[400px] bg-neoWhite h-full flex flex-col z-20">
+            <div class="p-6 border-neo-b bg-neoGreen">
+                <h2 class="text-2xl font-display uppercase tracking-wide mb-4">CART</h2>
                 <div class="relative">
-                    <i class="fa-regular fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" id="customerName" placeholder="Nama Customer" class="w-full bg-appleGray rounded-xl pl-10 pr-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-appleRed/50 transition border border-transparent focus:border-appleRed/30">
+                    <input type="text" id="customerName" placeholder="NAMA CUSTOMER" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm transition-all">
                 </div>
             </div>
 
-            <div class="flex-1 overflow-y-auto p-6 space-y-5" id="cart-list">
-                <p class="text-center text-gray-400 text-sm mt-10">Keranjang masih kosong</p>
+            <div class="flex-1 overflow-y-auto p-6 space-y-4 bg-neoGray border-neo-b" id="cart-list">
+                <div class="bg-neoWhite border-neo p-4 text-center font-bold uppercase">Keranjang Kosong</div>
             </div>
 
-            <div class="p-6 bg-white border-t border-gray-100">
-                <div class="flex bg-appleGray p-1 rounded-xl mb-6">
-                    <button class="flex-1 bg-white shadow-sm rounded-lg py-2 text-sm font-bold text-appleDark">Cash</button>
+            <div class="p-6 bg-neoWhite">
+                <div class="flex gap-2 mb-6">
+                    <button class="flex-1 bg-neoBlack text-neoWhite border-neo py-3 font-bold uppercase shadow-neo-sm">CASH</button>
                 </div>
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-lg font-bold">Total</span>
-                    <span class="text-2xl font-black text-appleRed" id="total-price">Rp 0</span>
+                <div class="flex items-center justify-between mb-6 bg-neoGreen border-neo p-4 shadow-neo-sm">
+                    <span class="text-xl font-bold uppercase">TOTAL</span>
+                    <span class="text-3xl font-display" id="total-price">Rp 0</span>
                 </div>
-                <button id="btn-checkout" class="w-full bg-appleRed hover:bg-appleRedHover text-white rounded-2xl py-4 font-bold text-lg shadow-lg shadow-appleRed/30 transition transform active:scale-95 flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-check-circle"></i> Bayar Sekarang
+                <button id="btn-checkout" class="w-full bg-neoOrange text-neoBlack border-neo py-5 font-display text-2xl tracking-wider shadow-neo hover-neo active-neo transition-all uppercase">
+                    BAYAR SEKARANG
                 </button>
             </div>
         </aside>
     </div>
 
 
-    <!-- ========================================== -->
-    <!-- VIEW 3: DASHBOARD OWNER -->
-    <!-- ========================================== -->
-    <div id="view-owner" class="h-full w-full flex flex-col bg-appleGray hidden-view">
-        <header class="flex justify-between items-center px-8 py-4 bg-white shadow-sm z-10">
-            <div>
-                <h1 class="text-2xl font-bold tracking-tight" id="header-owner-warkop-name">Warkop</h1>
-                <p class="text-sm text-gray-500 font-medium">Dashboard Owner (Manajemen Menu)</p>
+    <div id="view-owner" class="h-full w-full flex flex-col bg-neoWhite hidden-view overflow-hidden">
+        <header class="flex justify-between items-center px-8 py-5 bg-neoGreen border-neo-b z-10">
+            <div class="flex items-center gap-4">
+                <div class="bg-neoBlack text-neoWhite px-4 py-2 border-neo shadow-neo-sm">
+                    <h1 class="text-2xl font-display uppercase tracking-wider" id="header-owner-warkop-name">WARKOP</h1>
+                </div>
+                <span class="bg-neoOrange font-bold px-3 py-1 border-neo-sm uppercase text-sm text-neoBlack shadow-neo-sm">Owner Panel</span>
             </div>
-            <button onclick="logout()" class="text-gray-500 hover:text-appleRed transition"><i class="fa-solid fa-right-from-bracket mr-2"></i>Keluar</button>
+            <button onclick="logout()" class="bg-neoWhite border-neo px-6 py-2 font-bold hover:bg-neoBlack hover:text-neoWhite active-neo transition-all shadow-neo-sm uppercase">
+                <i class="fa-solid fa-power-off mr-2"></i>Keluar
+            </button>
         </header>
 
-        <main class="flex-1 p-8 overflow-y-auto">
-            <!-- Form Tambah Menu -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-8 max-w-4xl mx-auto">
-                <h2 class="text-lg font-bold mb-4 border-b pb-2">Tambah Menu Baru</h2>
-                <form id="form-add-menu" class="flex gap-4 items-end">
+        <main class="flex-1 p-8 overflow-y-auto bg-neoGray">
+            
+            <div class="bg-neoWhite p-8 border-neo shadow-neo mb-10 max-w-5xl mx-auto">
+                <div class="bg-neoBlack text-neoWhite p-3 border-neo inline-block mb-6 shadow-neo-sm">
+                    <h2 class="text-xl font-display uppercase tracking-wide">TAMBAH MENU</h2>
+                </div>
+                <form id="form-add-menu" class="flex gap-6 items-end">
                     <div class="flex-1">
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Nama Minuman</label>
-                        <input type="text" id="new-menu-name" class="w-full bg-appleGray rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-appleRed/50" required>
+                        <label class="block text-sm font-bold uppercase mb-2">Nama Menu</label>
+                        <input type="text" id="new-menu-name" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold uppercase input-neo shadow-neo-sm transition-all" required>
                     </div>
-                    <div class="w-48">
-                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Harga (Rp)</label>
-                        <input type="number" id="new-menu-price" class="w-full bg-appleGray rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-appleRed/50" required>
+                    <div class="w-64">
+                        <label class="block text-sm font-bold uppercase mb-2">Harga (Rp)</label>
+                        <input type="number" id="new-menu-price" class="w-full bg-neoWhite border-neo px-4 py-3 font-bold input-neo shadow-neo-sm transition-all" required>
                     </div>
-                    <button type="submit" id="btn-add-menu" class="bg-appleDark text-white rounded-xl px-6 py-2 h-[38px] font-bold shadow-md hover:bg-black transition">Tambah</button>
+                    <button type="submit" id="btn-add-menu" class="bg-neoOrange text-neoBlack border-neo px-8 py-3 h-[52px] font-bold uppercase shadow-neo hover-neo active-neo transition-all">
+                        TAMBAH +
+                    </button>
                 </form>
             </div>
 
-            <!-- List Menu Existing -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 max-w-4xl mx-auto">
-                <h2 class="text-lg font-bold mb-4 border-b pb-2">Daftar Menu Saat Ini</h2>
-                <div class="overflow-x-auto">
+            <div class="bg-neoWhite p-8 border-neo shadow-neo max-w-5xl mx-auto">
+                <div class="bg-neoBlack text-neoWhite p-3 border-neo inline-block mb-6 shadow-neo-sm">
+                    <h2 class="text-xl font-display uppercase tracking-wide">DATABASE MENU</h2>
+                </div>
+                <div class="border-neo overflow-hidden bg-neoWhite">
                     <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="text-xs text-gray-400 uppercase border-b border-gray-100">
-                                <th class="pb-3 font-semibold w-1/2">Nama Menu</th>
-                                <th class="pb-3 font-semibold">Harga</th>
-                                <th class="pb-3 font-semibold text-right">Aksi</th>
+                        <thead class="bg-neoOrange border-neo-b">
+                            <tr>
+                                <th class="p-4 font-display text-lg uppercase border-neo-r">NAMA MENU</th>
+                                <th class="p-4 font-display text-lg uppercase border-neo-r">HARGA</th>
+                                <th class="p-4 font-display text-lg uppercase">STATUS</th>
                             </tr>
                         </thead>
                         <tbody id="owner-menu-list">
-                            <!-- Data akan di-render di sini -->
-                            <tr><td colspan="3" class="py-4 text-center text-sm text-gray-400">Memuat data...</td></tr>
+                            <tr><td colspan="3" class="p-8 text-center font-bold uppercase border-neo-b">Memuat Data...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -177,22 +205,13 @@
         </main>
     </div>
 
-    <!-- ========================================== -->
-    <!-- LOGIKA JAVASCRIPT -->
-    <!-- ========================================== -->
     <script>
         const WEBHOOK_URL = 'https://n8n-mzbmiib3etk4.kangkung.sumopod.my.id/webhook/beuna-api';
         
-        // State Management
-        let appState = {
-            tenant: null,
-            username: null,
-            role: null // 'owner' atau 'cashier'
-        };
+        let appState = { tenant: null, username: null, role: null };
         let products = [];
         let cart = [];
 
-        // --- CORE API HELPER ---
         async function fetchBeunaAPI(action, payload = {}) {
             try {
                 const response = await fetch(WEBHOOK_URL, {
@@ -207,7 +226,6 @@
             }
         }
 
-        // --- VIEW ROUTER ---
         function switchView(viewId) {
             document.getElementById('view-login').classList.add('hidden-view');
             document.getElementById('view-kasir').classList.add('hidden-view');
@@ -215,36 +233,30 @@
             document.getElementById(viewId).classList.remove('hidden-view');
         }
 
-        // --- MODUL: AUTENTIKASI ---
         document.getElementById('form-login').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const btn = document.getElementById('btn-login-submit');
             const errorText = document.getElementById('login-error');
             const tenantInput = document.getElementById('login-tenant').value.trim();
             const userInput = document.getElementById('login-username').value.trim();
             const passInput = document.getElementById('login-password').value;
 
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
+            btn.innerHTML = 'LOADING...';
             btn.disabled = true;
             errorText.classList.add('hidden-view');
-
-            // Set tenant sementara untuk request login
             appState.tenant = tenantInput;
 
             const res = await fetchBeunaAPI('login', { username: userInput, password: passInput });
             
             if (res && res.length > 0) {
-                // Login Berhasil
                 const user = res[0];
                 appState.username = user.USERNAME;
-                appState.role = user.ROLE ? user.ROLE.toLowerCase() : 'cashier'; // default ke kasir jika kosong
+                appState.role = user.ROLE ? user.ROLE.toLowerCase() : 'cashier';
 
-                // Route berdasarkan role
                 if (appState.role === 'owner') {
-                    document.getElementById('header-owner-warkop-name').innerText = `Tenant: ${appState.tenant}`;
+                    document.getElementById('header-owner-warkop-name').innerText = appState.tenant;
                     switchView('view-owner');
-                    loadMenuForOwner(); // Load data spesifik untuk owner
+                    loadMenuForOwner();
                 } else {
                     document.getElementById('header-kasir-warkop-name').innerText = appState.tenant;
                     document.getElementById('header-kasir-user').innerText = appState.username.substring(0, 2).toUpperCase();
@@ -252,25 +264,22 @@
                     loadMenuForKasir();
                 }
             } else {
-                // Login Gagal
-                errorText.innerText = "Username, Password, atau Tenant salah.";
+                errorText.innerText = "LOGIN GAGAL! CEK KREDENSIAL.";
                 errorText.classList.remove('hidden-view');
-                appState.tenant = null; // reset
+                appState.tenant = null;
             }
 
-            btn.innerHTML = 'Masuk';
+            btn.innerHTML = 'MASUK ->';
             btn.disabled = false;
         });
 
         function logout() {
             appState = { tenant: null, username: null, role: null };
-            cart = [];
-            products = [];
+            cart = []; products = [];
             document.getElementById('form-login').reset();
             switchView('view-login');
         }
 
-        // --- MODUL: KASIR ---
         async function loadMenuForKasir() {
             const data = await fetchBeunaAPI('get_menu');
             const grid = document.getElementById('menu-grid');
@@ -280,68 +289,131 @@
                 products.forEach(p => {
                     if(p.IS_ACTIVE === "false" || p.IS_ACTIVE === false) return;
                     const div = document.createElement('div');
-                    div.className = 'bg-white rounded-2xl p-4 shadow-sm hover:shadow-lg border border-transparent hover:border-appleRed/20 transition cursor-pointer group flex flex-col justify-between h-48';
+                    div.className = 'bg-neoWhite border-neo p-5 shadow-neo hover-neo transition-all cursor-pointer flex flex-col justify-between h-48 relative overflow-hidden group';
                     div.onclick = () => addToCart(p);
                     div.innerHTML = `
-                        <div class="flex justify-between items-start">
-                            <div class="bg-red-50 text-appleRed p-2 rounded-xl"><i class="fa-solid fa-mug-hot text-xl"></i></div>
-                            <span class="opacity-0 group-hover:opacity-100 text-appleRed transition"><i class="fa-solid fa-plus-circle text-xl"></i></span>
+                        <div class="absolute top-0 right-0 bg-neoGreen border-neo-b border-neo-l p-2 transform translate-x-full group-hover:translate-x-0 transition-transform font-bold border-black">
+                            <i class="fa-solid fa-plus"></i> ADD
+                        </div>
+                        <div class="bg-neoOrange border-neo w-12 h-12 flex items-center justify-center shadow-neo-sm mb-4">
+                            <i class="fa-solid fa-mug-hot text-2xl text-neoBlack"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold text-lg leading-tight mb-1">${p.NAME}</h3>
-                            <p class="text-gray-500 text-sm font-medium">Rp ${parseInt(p.PRICE||0).toLocaleString('id-ID')}</p>
+                            <h3 class="font-display text-2xl uppercase tracking-tight leading-none mb-2">${p.NAME}</h3>
+                            <p class="bg-neoBlack text-neoGreen font-bold inline-block px-2 py-1 text-sm border-neo-sm">Rp ${parseInt(p.PRICE||0).toLocaleString('id-ID')}</p>
                         </div>
                     `;
                     grid.appendChild(div);
                 });
             } else {
-                grid.innerHTML = '<p class="col-span-full text-center text-red-400">Belum ada menu untuk warkop ini.</p>';
+                grid.innerHTML = '<div class="col-span-full text-center bg-neoWhite border-neo p-10 font-bold uppercase shadow-neo">Menu Kosong</div>';
             }
         }
 
-        // ... (Fungsi addToCart, renderCart, updateQuantity, checkout SAMA PERSIS SEPERTI SEBELUMNYA) ...
-        // Untuk menghemat ruang prompt, saya rangkum fungsinya (fungsi ini tidak berubah dari kode sebelumnya)
-        function addToCart(product) { /* ... sama seperti sblmnya ... */ const existing = cart.find(i=>i.product_name===product.NAME); const pr=parseInt(product.PRICE||0); if(existing){existing.quantity+=1; existing.subtotal=existing.quantity*pr;}else{cart.push({product_name:product.NAME, quantity:1, subtotal:pr});} renderCart(); }
-        function renderCart() { /* ... sama seperti sblmnya ... */ const cl=document.getElementById('cart-list'); const tt=document.getElementById('total-price'); if(cart.length===0){cl.innerHTML='<p class="text-center text-gray-400 text-sm mt-10">Kosong</p>'; tt.innerText='Rp 0'; return;} cl.innerHTML=''; let total=0; cart.forEach((i,idx)=>{total+=i.subtotal; const d=document.createElement('div'); d.className='flex items-center justify-between'; d.innerHTML=`<div class="flex-1"><h4 class="font-semibold text-sm">${i.product_name}</h4><p class="text-appleRed font-medium text-sm">Rp ${i.subtotal.toLocaleString('id-ID')}</p></div><div class="flex items-center gap-3 bg-appleGray rounded-full px-2 py-1"><button onclick="updateQuantity(${idx},-1)" class="w-6 h-6 rounded-full bg-white text-gray-500 hover:text-appleRed">-</button><span class="text-sm font-bold w-4 text-center">${i.quantity}</span><button onclick="updateQuantity(${idx},1)" class="w-6 h-6 rounded-full bg-white text-gray-500 hover:text-appleRed">+</button></div>`; cl.appendChild(d);}); tt.innerText=`Rp ${total.toLocaleString('id-ID')}`;}
-        window.updateQuantity = function(idx, chg) { /* ... sama seperti sblmnya ... */ cart[idx].quantity+=chg; if(cart[idx].quantity<=0) cart.splice(idx,1); else{ const p=products.find(x=>x.NAME===cart[idx].product_name); cart[idx].subtotal=cart[idx].quantity*parseInt(p.PRICE); } renderCart(); }
+        function addToCart(product) {
+            const existing = cart.find(i=>i.product_name===product.NAME);
+            const pr=parseInt(product.PRICE||0);
+            if(existing){
+                existing.quantity+=1;
+                existing.subtotal=existing.quantity*pr;
+            }else{
+                cart.push({product_name:product.NAME, quantity:1, subtotal:pr});
+            }
+            renderCart();
+        }
+
+        function renderCart() {
+            const cl=document.getElementById('cart-list');
+            const tt=document.getElementById('total-price');
+            if(cart.length===0){
+                cl.innerHTML='<div class="bg-neoWhite border-neo p-4 text-center font-bold uppercase">Keranjang Kosong</div>';
+                tt.innerText='Rp 0';
+                return;
+            }
+            cl.innerHTML='';
+            let total=0;
+            cart.forEach((i,idx)=>{
+                total+=i.subtotal;
+                const d=document.createElement('div');
+                d.className='bg-neoWhite border-neo p-4 shadow-neo-sm flex items-center justify-between';
+                d.innerHTML=`
+                    <div class="flex-1 pr-4">
+                        <h4 class="font-display text-lg uppercase leading-none mb-1">${i.product_name}</h4>
+                        <p class="font-bold text-neoOrange">Rp ${i.subtotal.toLocaleString('id-ID')}</p>
+                    </div>
+                    <div class="flex items-center gap-2 border-neo bg-neoGray">
+                        <button onclick="updateQuantity(${idx},-1)" class="w-8 h-8 flex items-center justify-center font-bold bg-neoWhite hover:bg-neoOrange border-neo-r transition-colors">-</button>
+                        <span class="w-6 text-center font-bold">${i.quantity}</span>
+                        <button onclick="updateQuantity(${idx},1)" class="w-8 h-8 flex items-center justify-center font-bold bg-neoWhite hover:bg-neoGreen border-neo-l transition-colors">+</button>
+                    </div>
+                `;
+                cl.appendChild(d);
+            });
+            tt.innerText=`Rp ${total.toLocaleString('id-ID')}`;
+        }
+
+        window.updateQuantity = function(idx, chg) {
+            cart[idx].quantity+=chg;
+            if(cart[idx].quantity<=0) cart.splice(idx,1);
+            else{
+                const p=products.find(x=>x.NAME===cart[idx].product_name);
+                cart[idx].subtotal=cart[idx].quantity*parseInt(p.PRICE);
+            }
+            renderCart();
+        }
         
         document.getElementById('btn-checkout').addEventListener('click', async () => {
             const customerName = document.getElementById('customerName').value;
-            if (cart.length === 0) return alert("Keranjang kosong!");
-            if (!customerName) return alert("Isi nama customer!");
+            if (cart.length === 0) return alert("KERANJANG KOSONG!");
+            if (!customerName) return alert("NAMA CUSTOMER WAJIB DIISI!");
+            
             const btn = document.getElementById('btn-checkout');
-            const og = btn.innerHTML; btn.innerHTML='Memproses...'; btn.disabled=true;
-            const res = await fetchBeunaAPI('create_order', { customer_name: customerName, cashier_id: appState.username, total_amount: cart.reduce((s,i)=>s+i.subtotal,0), order_items: cart });
-            if (res) { alert("Berhasil!"); cart=[]; document.getElementById('customerName').value=''; renderCart(); }
-            btn.innerHTML=og; btn.disabled=false;
+            const og = btn.innerHTML; 
+            btn.innerHTML='MEMPROSES...'; 
+            btn.disabled=true;
+            
+            const res = await fetchBeunaAPI('create_order', { 
+                customer_name: customerName, 
+                cashier_id: appState.username, 
+                total_amount: cart.reduce((s,i)=>s+i.subtotal,0), 
+                order_items: cart 
+            });
+            
+            if (res) { 
+                alert("TRANSAKSI BERHASIL DICATAT!"); 
+                cart=[]; 
+                document.getElementById('customerName').value=''; 
+                renderCart(); 
+            }
+            btn.innerHTML=og; 
+            btn.disabled=false;
         });
 
         // --- MODUL: OWNER (MANAJEMEN MENU) ---
         async function loadMenuForOwner() {
             const tbody = document.getElementById('owner-menu-list');
-            tbody.innerHTML = '<tr><td colspan="3" class="py-4 text-center text-sm text-gray-400">Memuat...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="3" class="p-6 text-center font-bold uppercase border-neo-b bg-neoGray">MEMUAT DATA...</td></tr>';
             
             const data = await fetchBeunaAPI('get_menu');
             if (data && data.length > 0) {
                 tbody.innerHTML = '';
                 data.forEach(p => {
                     const tr = document.createElement('tr');
-                    tr.className = 'border-b border-gray-50 last:border-0 hover:bg-gray-50 transition';
+                    tr.className = 'border-neo-b bg-neoWhite hover:bg-neoGreen transition-colors';
                     tr.innerHTML = `
-                        <td class="py-3 font-medium text-sm">${p.NAME}</td>
-                        <td class="py-3 text-sm text-gray-600">Rp ${parseInt(p.PRICE||0).toLocaleString('id-ID')}</td>
-                        <td class="py-3 text-right">
-                            <span class="text-xs bg-gray-200 text-gray-500 px-2 py-1 rounded-md cursor-not-allowed" title="Fitur hapus di n8n butuh Action khusus">Bisa diedit via Database</span>
+                        <td class="p-4 font-bold uppercase border-neo-r">${p.NAME}</td>
+                        <td class="p-4 font-bold border-neo-r text-neoOrange">Rp ${parseInt(p.PRICE||0).toLocaleString('id-ID')}</td>
+                        <td class="p-4">
+                            <span class="bg-neoBlack text-neoWhite px-3 py-1 font-bold text-xs uppercase border-neo-sm">Tersedia</span>
                         </td>
                     `;
                     tbody.appendChild(tr);
                 });
             } else {
-                tbody.innerHTML = '<tr><td colspan="3" class="py-4 text-center text-sm text-red-400">Belum ada menu.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="3" class="p-6 text-center font-bold uppercase border-neo-b bg-neoOrange">DATABASE KOSONG</td></tr>';
             }
         }
 
-        // Tambah Menu Baru
         document.getElementById('form-add-menu').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-add-menu');
@@ -358,11 +430,11 @@
 
             if(res) {
                 nameInput.value = ''; priceInput.value = '';
-                loadMenuForOwner(); // refresh table
+                loadMenuForOwner(); 
             } else {
-                alert("Gagal menambah menu. Pastikan webhook n8n sudah menangani action 'add_menu'");
+                alert("GAGAL MENAMBAH MENU. CEK KONEKSI N8N.");
             }
-            btn.innerText = 'Tambah'; btn.disabled = false;
+            btn.innerText = 'TAMBAH +'; btn.disabled = false;
         });
 
     </script>
